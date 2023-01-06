@@ -4,5 +4,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    volumes:
+      - type: bind
+        source: "."
+        target: "/home/rust"
+      - /home/rust/target
     ports:
       - 8080:8080
