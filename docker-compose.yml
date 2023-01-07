@@ -7,7 +7,7 @@ services:
     volumes:
       - type: bind
         source: "."
-        target: "/home/rust"
-      - /home/rust/target
+        target: "/app"
+      - /app/target
     ports:
       - 8080:8080
