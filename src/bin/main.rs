@@ -1,8 +1,8 @@
-use actix_web::{get, web, App, HttpServer, Responder};
+use actix_web::{get, App, HttpServer, Responder};
 
-#[get("/hello/{name}")]
-async fn greet(name: web::Path<String>) -> impl Responder {
-    format!("Hello {name}!")
+#[get("/health")]
+async fn greet() -> impl Responder {
+    "ok"
 }
 
 #[actix_web::main] // or #[tokio::main]
