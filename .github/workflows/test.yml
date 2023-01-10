@@ -1,0 +1,40 @@
+name: test workflow
+on:
+  workflow_call:
+    inputs:
+      docker_image_tag_ci:
+        required: true
+        type: string
+    secrets: {}
+jobs:
+  docker-compose-up-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v3
+      - name: Cache Docker Registry
+        uses: actions/cache@v3
+        with:
+          path: /tmp/docker-registry
+          key: 'docker-registry-${{ github.ref }}-${{ github.sha }}'
+          restore-keys: |
+            docker-registry-${{ github.ref }}
+            docker-registry-
+      - name: Boot-up Local Docker Registry
+        run: >-
+          docker run -d -p 5000:5000 --restart=always --name registry -v
+          /tmp/docker-registry:/var/lib/registry registry:2
+      - name: Wait for Docker Registry
+        run: 'npx wait-on tcp:5000'
+      - name: Get Docker Image Tag
+        env:
+          TAG: '${{ inputs.docker_image_tag_ci }}'
+        run: |
+          echo "DOCKER_IMAGE_TAG_CI=$TAG" >> $GITHUB_ENV
+          echo TAG $TAG
+      - name: Docker Compose Pull
+        run: |
+          docker compose -f docker-compose.yml -f docker-compose.ci.yml pull app
+      - name: Docker Compose Up
+        run: |
+          docker compose -f docker-compose.yml -f docker-compose.ci.yml up -d --wait

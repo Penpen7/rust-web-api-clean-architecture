@@ -4,10 +4,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: develop
     volumes:
       - type: bind
-        source: "./src"
-        target: "/app/src"
+        source: "."
+        target: "/app"
+      - /app/target
     healthcheck:
       test: "curl -f http://localhost:8080/health"
       interval: 10s
