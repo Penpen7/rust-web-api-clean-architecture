@@ -1,0 +1,4 @@
+version: "3.9"
+services:
+  app:
+    image: "localhost:5000/app-ci:${DOCKER_IMAGE_TAG_CI}"
