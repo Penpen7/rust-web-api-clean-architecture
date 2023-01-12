@@ -20,6 +20,7 @@ services:
       - 8080:8080
     networks:
       - backend
+    tty: true
 networks:
   backend:
     driver: bridge
