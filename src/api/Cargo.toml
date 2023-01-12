@@ -1,5 +1,5 @@
 [package]
-name = "rust-clean-architecture-web-api"
+name = "api"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,11 +7,3 @@ edition = "2021"
 
 [dependencies]
 actix-web = "4"
-api = { path = "./src/api" }
-
-[workspace]
-members = ["./src/api"]
-
-[[bin]]
-name = "main"
-path = "src/bin/main.rs"
