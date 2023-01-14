@@ -15,4 +15,5 @@ WORKDIR /app
 EXPOSE 8080
 COPY --from=cacher /app/target target
 RUN cargo install cargo-watch
-CMD cargo watch -x "run --bin main"
+RUN rustup component add clippy rustfmt
+CMD cargo watch -x fmt -x "run --bin main"

@@ -40,4 +40,4 @@ jobs:
           docker compose -f docker-compose.yml -f docker-compose.ci.yml up -d --wait
       - name: cargo test
         run: |
-          docker compose exec app cargo test --workspace
+          docker compose exec app cargo clippy

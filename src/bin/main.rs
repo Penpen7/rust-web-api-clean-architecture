@@ -1,13 +1,10 @@
-use actix_web::{get, App, HttpServer, Responder};
-
-#[get("/health")]
-async fn greet() -> impl Responder {
-    "ok"
-}
+use actix_web::{web, App, HttpServer};
+extern crate api;
 
 #[actix_web::main] // or #[tokio::main]
 pub async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| App::new().service(greet))
+    println!("listening on 0.0.0.0:8080");
+    HttpServer::new(|| App::new().route("/health", web::get().to(api::healthcheck)))
         .bind(("0.0.0.0", 8080))?
         .run()
         .await
