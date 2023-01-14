@@ -59,6 +59,11 @@ jobs:
               --set='*.cache-to=type=local,dest=/tmp/.buildx-cache,mode=max' \
               -f docker-compose.yml -f docker-compose.ci.yml \
               --push
+  fmt-test:
+    needs: docker-build
+    uses: ./.github/workflows/fmt-check.yml
+    with:
+      docker_image_tag_ci: ${{ needs.docker-build.outputs.docker_image_tag_ci }}
   app-test:
     needs: docker-build
     uses: ./.github/workflows/test.yml
