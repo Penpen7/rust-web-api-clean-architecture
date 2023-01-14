@@ -64,6 +64,11 @@ jobs:
     uses: ./.github/workflows/fmt-check.yml
     with:
       docker_image_tag_ci: ${{ needs.docker-build.outputs.docker_image_tag_ci }}
+  clippy:
+    needs: docker-build
+    uses: ./.github/workflows/clippy.yml
+    with:
+      docker_image_tag_ci: ${{ needs.docker-build.outputs.docker_image_tag_ci }}
   app-test:
     needs: docker-build
     uses: ./.github/workflows/test.yml
