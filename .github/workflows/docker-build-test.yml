@@ -56,9 +56,13 @@ jobs:
           docker buildx bake \
               --builder="${{ steps.buildx.outputs.name }}" \
               --set='*.cache-from=type=local,src=/tmp/.buildx-cache' \
-              --set='*.cache-to=type=local,dest=/tmp/.buildx-cache,mode=max' \
+              --set='*.cache-to=type=local,dest=/tmp/.buildx-cache-new,mode=max' \
               -f docker-compose.yml -f docker-compose.ci.yml \
               --push
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
   fmt-test:
     needs: docker-build
     uses: ./.github/workflows/fmt-check.yml
