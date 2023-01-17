@@ -1,0 +1,5 @@
+CREATE DATABASE db;
+
+\c db
+
+CREATE SCHEMA db;
