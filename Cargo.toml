@@ -10,7 +10,13 @@ actix-web = "4"
 api = { path = "./src/api" }
 
 [workspace]
-members = ["./src/api", "./src/domain"]
+members = [
+  "./src/api",
+  "./src/domain",
+  "./src/usecase",
+  "./src/application",
+  "./src/repository",
+]
 
 [[bin]]
 name = "main"

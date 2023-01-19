@@ -1,4 +1,6 @@
 use actix_web::{Error, HttpResponse};
+mod di;
+pub mod user_find;
 
 pub async fn healthcheck() -> actix_web::Result<HttpResponse, Error> {
     Ok(HttpResponse::Ok().body("ok".to_string()))

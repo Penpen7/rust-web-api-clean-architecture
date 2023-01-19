@@ -1,12 +1,11 @@
 [package]
-name = "api"
+name = "repository"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-actix-web = "4"
 usecase = { path = "../usecase" }
+domain = { path = "../domain" }
 application = { path = "../application" }
-repository = { path = "../repository" }

@@ -18,6 +18,7 @@ impl UserName {
     }
 }
 
+#[derive(Clone, Debug)]
 pub struct MailAddress {
     value: String,
 }
